@@ -108,3 +108,41 @@ API Token:   ваш токен
 <img width="566" height="231" alt="image" src="https://github.com/user-attachments/assets/65d99733-667b-407c-8ef2-3f180d39a014" />
 
 В браузере также должно быть установлено безопасное подключение, потому что должен был установиться сертификат.
+
+
+12. Переходим в  дефолтный конфиг Nginx
+
+```bash
+nano /etc/nginx/sites-available/default
+```
+
+13. Вставляем данный фрагмент, его нужно будет вставить в server где указан 443 порт, server идет вторым по порядку, вставлять строго после `location /`
+
+
+```bash
+location /путь к панели/ {
+    proxy_pass http://127.0.0.1:ваш порт панели;
+}
+```
+
+Далее нажимаем Ctrl + x, потом y и далее Enter
+
+14. Проверяем синтаксис и перезапускаем nginx
+
+```bash
+nginx -t && systemctl reload nginx
+```
+
+Если верно должно отобразится это:
+
+```bash
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+```
+
+
+
+
+
+
+
